@@ -5,6 +5,7 @@
     <tr>
       <th>Type</th>
       <th>Event At</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -12,6 +13,9 @@
       <tr>
         <td><%= format_event_type(event.event_type) %></td>
         <td><%= format_time(event.event_at) %></td>
+        <td>
+          <%= link_to "Edit", edit_event_path(event) %>
+        </td>
       </tr>
     <% end %>
   </tbody>

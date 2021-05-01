@@ -1,0 +1,7 @@
+<h1>Edit Event</h1>
+
+<%= form_for @event do |f| %>
+  <%= render partial: "layouts/errors", locals: {object: f.object} %>
+  <%= f.datetime_select :event_at %> <br /><br />
+  <%= f.submit "Update" %>
+<% end %>

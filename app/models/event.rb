@@ -8,7 +8,7 @@ class Event < ApplicationRecord
   validates :event_type, inclusion: { in: EVENT_TYPES.keys.map(&:to_s) }
 
   before_validation do
-    self.event_at = Time.now
+    self.event_at = Time.now if self.event_at.blank?
   end
 
   belongs_to :user
