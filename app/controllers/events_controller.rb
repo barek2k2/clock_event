@@ -1,11 +1,12 @@
 class EventsController < ApplicationController
   include EventsHelper
   EVENTS_PER_PAGE = 15
+  
   before_action :authenticate_user!
   before_action :load_events
 
   def create
-    event = build_new_event
+    event = construct_new_event
     if event.save
       redirect_to root_path, notice: "#{format_event_type(event.event_type)} traced successfully!"
     else
@@ -27,7 +28,7 @@ class EventsController < ApplicationController
   end
 
   private
-  def build_new_event
+  def construct_new_event
     event = @events.new
     event.event_at = Time.now
     event.event_type = current_user.next_event_type

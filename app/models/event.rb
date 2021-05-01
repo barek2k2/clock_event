@@ -28,9 +28,12 @@ class Event < ApplicationRecord
 
   private
   def ensure_valid_event
-    latest_next_event = Event.sorted.where("event_at > ? ", self.event_at_was).first
-    if latest_next_event&.event_at < self.event_at
-      self.errors.add(:event_at, "Invalid time")
+    next_event = Event.sorted.where("event_at > ? ", self.event_at_was).first
+    previous_event = Event.sorted.where("event_at < ? ", self.event_at_was).first
+    if next_event && self.event_at > next_event.event_at
+      self.errors.add(:event_at, "Time exceeded with next event")
+    elsif previous_event && self.event_at < previous_event.event_at
+      self.errors.add(:event_at, "Time past away with previous event")
     end
   end
 
