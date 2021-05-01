@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   def create
     event = build_new_event
     if event.save
-      redirect_to root_path, notice: "#{format_event_type(event_params[:event_type])} traced successfully!"
+      redirect_to root_path, notice: "#{format_event_type(event.event_type)} traced successfully!"
     else
       redirect_to root_path, alert: event.errors.full_messages.join(", ")
     end
@@ -20,7 +20,7 @@ class EventsController < ApplicationController
   def update
     @event = @events.find(params[:id])
     if @event.update(event_params)
-      redirect_to events_path, notice: "Event was updated successfully!"
+      redirect_to root_path, notice: "Event was updated successfully!"
     else
       render "edit"
     end
@@ -28,8 +28,9 @@ class EventsController < ApplicationController
 
   private
   def build_new_event
-    event = @events.new(event_params)
+    event = @events.new
     event.event_at = Time.now
+    event.event_type = current_user.next_event_type
     event.location_ip = request.remote_ip
     event.user_agent = request.user_agent
     event
@@ -40,7 +41,7 @@ class EventsController < ApplicationController
   end
   
   def event_params
-    params.require(:event).permit(:event_type, :event_at)
+    params.require(:event).permit(:event_at)
   end
 
 end
