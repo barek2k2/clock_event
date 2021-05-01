@@ -27,13 +27,15 @@ class Event < ApplicationRecord
   end
 
   private
+  # if event_at is greater than next event_at or less than previous event_at
+  # it adds error
   def ensure_valid_event
     next_event = Event.sorted.where("event_at > ? ", self.event_at_was).first
-    previous_event = Event.sorted.where("event_at < ? ", self.event_at_was).first
+    previous_event = Event.sorted.where("event_at < ? ", self.event_at_was).last
     if next_event && self.event_at > next_event.event_at
-      self.errors.add(:event_at, "Time exceeded with next event")
+      self.errors.add(:event_at, "exceeded with next event")
     elsif previous_event && self.event_at < previous_event.event_at
-      self.errors.add(:event_at, "Time past away with previous event")
+      self.errors.add(:event_at, "becomes older with the previous event")
     end
   end
 

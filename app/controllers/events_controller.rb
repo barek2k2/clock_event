@@ -8,7 +8,7 @@ class EventsController < ApplicationController
   def create
     event = construct_new_event
     if event.save
-      redirect_to root_path, notice: "#{format_event_type(event.event_type)} traced successfully!"
+      redirect_to root_path, notice: "#{format_event_type(event.event_type)} was traced successfully!"
     else
       redirect_to root_path, alert: event.errors.full_messages.join(", ")
     end
