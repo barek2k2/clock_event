@@ -1,6 +1,6 @@
 
 <%= form_for @event do |f| %>
-  <%= f.submit format_event_type(@event.event_type) %>
+  <%= f.submit format_event_type(@event.event_type), class: clock_btn_class(@event), id: "clock_track_btn" %>
 <% end %>
 
 <%= render file: "home/events" %>

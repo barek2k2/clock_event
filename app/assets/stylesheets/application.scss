@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap";
+
+#clock_track_btn {
+  height: 80px;
+  width: 220px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.no-event-yet{
+  padding: 30px 0;
+  font-size: 16px;
+}

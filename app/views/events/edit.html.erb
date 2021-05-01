@@ -1,7 +1,9 @@
-<h1>Edit Event</h1>
+<h2>Edit Event</h2>
 
 <%= form_for @event do |f| %>
-  <%= render partial: "layouts/errors", locals: {object: f.object} %>
-  <%= f.datetime_select :event_at %> <br /><br />
-  <%= f.submit "Update" %> <%= link_to "Cancel", root_path %>
+  <%= render partial: "layouts/shared/errors", locals: {obj: f.object} %>
+  <div class="form-group">
+    <%= f.datetime_select :event_at %> <br /><br />
+  </div>
+  <%= f.submit "Update", class: "btn btn-primary" %> <%= link_to "Cancel", root_path, class: "btn btn-default" %>
 <% end %>
