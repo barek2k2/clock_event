@@ -1,6 +1,7 @@
-<h1>Dashboard</h1>
 
 <%= form_for @event do |f| %>
   <%= f.hidden_field :event_type %>
   <%= f.submit format_event_type(@event_type) %>
 <% end %>
+
+<%= render file: "home/events" %>

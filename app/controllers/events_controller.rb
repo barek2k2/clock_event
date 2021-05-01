@@ -1,11 +1,8 @@
 class EventsController < ApplicationController
+  include EventsHelper
   EVENTS_PER_PAGE = 15
   before_action :authenticate_user!
   before_action :load_events
-
-  def index
-    @events = @events.asc.paginate page: params[:page], per_page: EVENTS_PER_PAGE
-  end
 
   def create
     event = build_new_event

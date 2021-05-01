@@ -3,6 +3,7 @@ class Event < ApplicationRecord
     clock_in: "clock_in",
     clock_out: "clock_out",
   }
+  EVENTS_PER_PAGE = 15
   validates :user_id, presence: true
   validates :event_at, presence: true
   validates :event_type, inclusion: { in: EVENT_TYPES.keys.map(&:to_s) }
@@ -13,8 +14,8 @@ class Event < ApplicationRecord
 
   belongs_to :user
 
-  scope :recent, -> { order(created_at: :desc) }
-  scope :asc, -> { order(created_at: :asc) }
+  scope :recent, -> { order(event_at: :desc) }
+  scope :sorted, -> { order(event_at: :asc) }
 
   def clocked_in?
     self.event_type == EVENT_TYPES[:clock_in]

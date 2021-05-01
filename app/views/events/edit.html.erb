@@ -3,5 +3,5 @@
 <%= form_for @event do |f| %>
   <%= render partial: "layouts/errors", locals: {object: f.object} %>
   <%= f.datetime_select :event_at %> <br /><br />
-  <%= f.submit "Update" %>
+  <%= f.submit "Update" %> <%= link_to "Cancel", events_path %>
 <% end %>
