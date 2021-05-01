@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   def create
     event = build_event
     if event.save
-      redirect_to root_path, notice: "#{event_params[:event_type].to_s.humanize} traced successfully!"
+      redirect_to root_path, notice: "#{format_event_type(event_params[:event_type])} traced successfully!"
     else
       redirect_to root_path, alert: event.errors.full_messages.join(", ")
     end

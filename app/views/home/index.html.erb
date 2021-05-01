@@ -2,5 +2,5 @@
 
 <%= form_for @event do |f| %>
   <%= f.hidden_field :event_type %>
-  <%= f.submit @event_type.humanize %>
+  <%= f.submit format_event_type(@event_type) %>
 <% end %>

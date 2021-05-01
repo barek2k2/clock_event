@@ -10,9 +10,11 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.event_type %></td>
-        <td><%= event.event_at %></td>
+        <td><%= format_event_type(event.event_type) %></td>
+        <td><%= format_time(event.event_at) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= will_paginate @events %>
